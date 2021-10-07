@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+  If you are serving your web app in a path other than the root, change the
+  href value below to reflect the base path you are serving from.
+
+  The path provided below has to start and end with a slash "/" in order for
+  it to work correctly.
+
+  For more details:
+  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+-->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Bill购物">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <style>
+        .preLoad {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        .preLoad img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 575.98px) {
+            .progress-bar {
+                width: 100%;
+            }
+        }
+    </style>
+  <title>Bill购物</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body bgcolor="#ffffff">
+<div class="preLoad" id='preLoad'>
+  <img width="300" src="assets/img/start-load1.gif" />
+  <img width="600" src="assets/img/start-load5.gif" class="progress-bar" />
+</div>
+<script>
+        (function () {
+            var preLoad = document.getElementById('preLoad');
+            if (window.name == "") {
+                preLoad && (preLoad.style.display = 'block');
+                window.name = "isReload"; // 在首次进入页面时我们可以给window.name设置一个固定值
+            } else if (window.name == "isReload") {
+                /* console.log("页面被刷新"); */
+                preLoad && (preLoad.style.display = 'none');
+            }
+        })()
+    </script>
+<!-- This script installs service_worker.js to provide PWA functionality to
+application. For more information, see:
+https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
+        var serviceWorkerVersion = '3716227437';
+        var scriptLoaded = false;
+
+        function loadMainDartJs() {
+            if (scriptLoaded) {
+                return;
+            }
+            scriptLoaded = true;
+            var scriptTag = document.createElement('script');
+            scriptTag.src = 'main.dart.js';
+            scriptTag.type = 'application/javascript';
+            document.body.append(scriptTag);
+        }
+
+        if ('serviceWorker' in navigator) {
+            // Service workers are supported. Use them.
+            window.addEventListener('load', function () {
+                // Wait for registration to finish before dropping the <script> tag.
+                // Otherwise, the browser will load the script multiple times,
+                // potentially different versions.
+                var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+                navigator.serviceWorker.register(serviceWorkerUrl)
+                    .then((reg) => {
+                        function waitForActivation(serviceWorker) {
+                            serviceWorker.addEventListener('statechange', () => {
+                                if (serviceWorker.state == 'activated') {
+                                    console.log('Installed new service worker.');
+                                    loadMainDartJs();
+                                }
+                            });
+                        }
+                        if (!reg.active && (reg.installing || reg.waiting)) {
+                            // No active web worker and we have installed or are installing
+                            // one for the first time. Simply wait for it to activate.
+                            waitForActivation(reg.installing || reg.waiting);
+                        } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+                            // When the app updates the serviceWorkerVersion changes, so we
+                            // need to ask the service worker to update.
+                            console.log('New service worker available.');
+                            reg.update();
+                            waitForActivation(reg.installing);
+                        } else {
+                            // Existing service worker is still good.
+                            console.log('Loading app from service worker.');
+                            loadMainDartJs();
+                        }
+                    });
+
+                // If service worker doesn't succeed in a reasonable amount of time,
+                // fallback to plaint <script> tag.
+                setTimeout(() => {
+                    if (!scriptLoaded) {
+                        console.warn(
+                            'Failed to load app from service worker. Falling back to plain <script> tag.',
+                        );
+                        loadMainDartJs();
+                    }
+                }, 4000);
+            });
+        } else {
+            // Service workers not supported. Just drop the <script> tag.
+            loadMainDartJs();
+        }
+    </script>
+</body>
+
+</html>
