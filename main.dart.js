@@ -9202,23 +9202,25 @@ _.c=c
 _.d=d},
 Nh:function Nh(){}},F={ng:function ng(a,b){this.c=a
 this.a=b},Zg:function Zg(a){this.a=a},
-ap8:function(){var s=0,r=P.T(t.H),q,p,o,n,m
+ap8:function(){var s=0,r=P.T(t.H),q,p,o,n,m,l
 var $async$ap8=P.O(function(a,b){if(a===1)return P.Q(b,r)
 while(true)switch(s){case 0:if($.H==null)N.axb()
 $.H.toString
-n=H
-m=J
+m=H
+l=J
 s=2
 return P.Y(V.zP(),$async$ap8)
-case 2:q=n.ay6(m.aM(b.a,"isLogin"))
+case 2:q=m.ay6(l.aM(b.a,"isLogin"))
 p=q===!0
+q=$.atq()
+if(!q)p=!1
 P.pv("\u662f\u5426\u5df2\u7ecf\u767b\u5f55---"+C.fR.i(p))
-q=Y.avL(new F.Ki(p,null),H.a([T.iF(null,new F.apa(),t.tA),T.iF(null,new F.apb(),t.XC)],t.Ds))
+o=Y.avL(new F.Ki(p,null),H.a([T.iF(null,new F.apa(),t.tA),T.iF(null,new F.apb(),t.XC)],t.Ds))
 if($.H==null)N.axb()
-o=$.H
-o.T7(q)
-o.Go()
-if($.atq())X.awN(new X.kG(null,null,null,C.aW,null,null))
+n=$.H
+n.T7(o)
+n.Go()
+if(q)X.awN(new X.kG(null,null,null,C.aW,null,null))
 return P.R(null,r)}})
 return P.S($async$ap8,r)},
 apa:function apa(){},
@@ -38553,7 +38555,7 @@ $1:function(a){return new Y.kA(new P.ax(t.V))},
 $S:331}
 F.Ki.prototype={
 u:function(a,b){var s=null,r=H.a([C.x7,C.xk,C.xo],t.a9),q=H.a([C.J_,C.J0],t.ss),p=X.arW(C.fB,s,C.a_,C.Pp,s),o=this.c?new O.lQ(s):new K.xo(s)
-q=B.awm(new S.xv(o,"AiRi",p,r,new F.a64(),q,!1,s),!0,!0)
+q=B.awm(new S.xv(o,"Bill\u8d2d\u7269",p,r,new F.a64(),q,!1,s),!0,!0)
 return new A.ya(q,C.R,s)}}
 F.a64.prototype={
 $2:function(a,b){return a},
